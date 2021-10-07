@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +14,189 @@
         * {
             margin: 0;
             padding: 0;
+            user-select: none;
+        }
+        body{
+            background-color: black;
         }
 
-        canvas {
+        #gameCanvas {
+            margin: 1vw;
+            z-index: -1;
             position: absolute;
-            height: 100%;
-            width: 100%;
+            height: 70%;
+            width: 98%;
             left: 0;
-            top: 0;
+            top: 10vh;
             cursor: crosshair;
+            border: 0.2rem solid #fff;
+            border-radius: 1rem;
+            
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+                box-sizing: border-box;
+        }
+
+        .landingView {
+            
+            user-select: none;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            /* display: none; */
+        }
+
+        .gameLogo {
+            font-size: 2rem;
+            margin-bottom: 1vh;
+        }
+
+        .options {
+            font-size: 1.5rem;
+            cursor: pointer;
+            /* margin-bottom: 1vh; */
+
+        }
+
+        ul {
+            height: 2px;
+            background-color: blanchedalmond;
+        }
+
+        .gameSettingsContainer {
+            font-family: 'Satisfy', cursive;
+            word-spacing: 1rem;
+            max-width: 96vw;
+            text-align: center;
+            border: 0.2rem solid #fff;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+            box-sizing: border-box;
+            /* transition: 0.2s; */
+        }
+
+        @keyframes flicker {
+
+            0%,
+            18%,
+            22%,
+            25%,
+            53%,
+            57%,
+            100% {
+                text-shadow:
+                    0 0 4px #fff,
+                    0 0 11px #fff,
+                    0 0 19px #fff,
+                    0 0 40px #0fa,
+                    0 0 80px #0fa,
+                    0 0 90px #0fa,
+                    0 0 100px #0fa,
+                    0 0 150px #0fa;
+            }
+
+            20%,
+            24%,
+            55% {
+                text-shadow: none;
+            }
+        }
+
+        .wrapper {
+            /* border: 2px solid green; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            border-radius: 1rem;
+            overflow: auto;
+            margin-bottom: 0.5vh;
+
+        }
+
+        .wrapper:hover {
+            color: #1a1b1d;
+            background: #3ae2ee;
+            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
+        }
+
+        .rangeSlider {
+            margin-top: 0.5vh;
+            width: 90%;
+        }
+
+        .neonText {
+            color: #fff;
+            text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #eb1a63,
+                0 0 82px #eb1a63,
+                0 0 92px #eb1a63,
+                0 0 102px #eb1a63,
+                0 0 151px#eb1a63;
+
+        }
+        #play{
+            animation: flicker 5s infinite alternate;   
         }
     </style>
 </head>
 
 <body>
-    <canvas id="canvas" width="300" height="300"></canvas>
+    <canvas id="gameCanvas" width="300" height="300"></canvas>
+    <div class="landingView" id="gameSettings" style="cursor: pointer;">
+        <div class="gameSettingsContainer">
+            <div class="gameLogo neonText">FIREBALL PONG ☄️<ul></ul>
+            </div>
+            <div class="wrapper" style="font-size: 2rem;" id="play">PLAY</div>
+            <div class="wrapper" id="mode">
+                <div style="font-size: 1.2rem;" class="neonText"> Mode</div>
+                <div class="options" id="mval">Single-Player</div>
+            </div>
+            <div class="wrapper" id="reflection">
+                <div style="font-size: 1.2rem;" class="neonText"> Reflection</div>
+                <div class="options" id="rval">Random</div>
+            </div>
+            <div class="wrapper" id="difficulty">
+                <div style="font-size: 1.2rem;" class="neonText">Difficulty</div>
+                <div class="options" id="dval">Easy</div>
+            </div>
+           
+            <div class="wrapper">
+                <div style="font-size: 1.2rem;" class="neonText">Paddle Size</div>
+                <input type="range" min="1" max="100" class="rangeSlider" value="50" id="pSize">
+            </div>
+            <div class="wrapper" style="display: none;">
+                <div style="font-size: 1.2rem;" class="neonText">Fireball Speed</div>
+                <input type="range" min="1" max="100" class="rangeSlider" value="10" id="speed">
+            </div>
+            
+        </div>
+
+
+    </div>
 </body>
-<script src="main.js"></script>
-<script src="main2.js"></script>
+<script src="gameSettings.js"></script>
+<script src="fireball.js"></script>
+
 
 </html>
