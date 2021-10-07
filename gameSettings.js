@@ -1,7 +1,9 @@
 //mode: single or multiplayer
 let mode=document.getElementById("mode");
 let modeVal=0;
+
 mode.onclick=function(){
+  
     let mval=document.getElementById("mval");
     if(modeVal==0)
     {
@@ -32,9 +34,8 @@ random.onclick=function(){
     }
 };
 let difficulty=document.getElementById("difficulty");
-let dv=0;
+let dv=1;
 difficulty.onclick=function(){
-    let dval=document.getElementById("dval");
     if(dv==0)
     {
         dval.innerHTML="Medium";
@@ -51,3 +52,50 @@ difficulty.onclick=function(){
         dv=0;
     }
 }
+
+
+let fullScreen=true;
+let fsIcon=document.getElementById("fullScreenIcon");
+fsIcon.onclick=function(){
+    if(fullScreen==true)
+    {
+        closeFullscreen();
+        fullScreen=false;
+    }
+    else
+    {
+        openFullscreen();
+        fullScreen=true;
+    }
+}
+
+
+
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  function closeFullscreen() {
+    // if (document.exitFullscreen) {
+    //   document.exitFullscreen();
+    // } else if (document.webkitExitFullscreen) { /* Safari */
+    //   document.webkitExitFullscreen();
+    // } else if (document.msExitFullscreen) { /* IE11 */
+    //   document.msExitFullscreen();
+    // }
+    if (document.fullscreenElement) {
+        setTimeout(() => document.exitFullscreen(), 1000);
+    }
+  }
+
+
+  let backbtn=document.getElementById("backIcon");
+  backbtn.onclick=function(){
+      document.location.reload()
+  }

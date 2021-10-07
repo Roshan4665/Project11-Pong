@@ -1,4 +1,5 @@
 //
+var elem = document.documentElement;
 let size = 30;
 let maxVelocity = 7;
 document.getElementById("play").onclick = function () {
@@ -6,8 +7,10 @@ document.getElementById("play").onclick = function () {
   size = document.getElementById("pSize").value;
   if (dv == 1) maxVelocity = 10;
   else if (dv == 2) maxVelocity = 14;
+  openFullscreen();
   play();
 };
+
 
 function play() {
   let bgColor = 'black';
@@ -21,16 +24,15 @@ function play() {
   let p1score = 0, cs = 0;
   (onresize = function () {
     if (canvas.clientHeight < canvas.clientWidth) {
-      canvas.style.width = "60%";
-      canvas.style.height = "80%";
-      canvas.style.left = "20%";
+      canvas.style.width = "60vw";
+      canvas.style.left = "20vw";
     }
     width = canvas.width = canvas.clientWidth;
     height = canvas.height = canvas.clientHeight;
     o = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
     edge = { top: -o.y, right: width - o.x, bottom: height - o.y, left: -o.x }
   })();
-
+  let pshelper=0;
   let particles = {};
   let newParticle = (function () {
     var nextIndex = 0;
@@ -49,7 +51,7 @@ function play() {
       };
     };
   })();
-
+  let state="Start";
   let fireballs = {};
   let newFireball = (function () {
     var nextIndex = 0;
@@ -66,14 +68,28 @@ function play() {
   let fc = 0;
   canvas.onclick = function () {
     if (fc == 0) {
-      fc = 0;
+      fc = 1;
+      state="continue";
       newFireball(
         -100, 50, 0, 0
       );
     }
   };
   let mx = 0;
+
+
+  function drawStartMsg(){
+    ctx.beginPath();
+    ctx.font = "32px Arial";
+    ctx.strokeStyle = "pink";
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.strokeText("Tap to "+state, 0, 0);
+    ctx.closePath();
+  }
   requestAnimationFrame(loop = function () {
+    
+    
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalCompositeOperation = 'source-over';
     ctx.globalAlpha = 1;
@@ -90,18 +106,15 @@ function play() {
     }
     handleUserMovement();
     drawPaddle();
-    drawScore();
     requestAnimationFrame(loop);
+    if(fc==0) drawStartMsg();
+    else drawScore();
   });
 
   size =Math.max( width/6,size * width / (200+(dv*50)));
-  let paddle1 = { x: edge.left, len: size };
+  let paddle1 = { x: edge.left+width/2-size/2, len: size };
   let paddle2 = { x: edge.left, len: width };
-
-
-
-
-
+  let controller=document.getElementById("position");
   function particlesLogic() {
     for (var i in particles) {
       var p = particles[i];
@@ -153,7 +166,7 @@ function play() {
     ctx.fill();
     ctx.closePath();
   }
-
+  let scard=document.getElementById("scoreDiv");
 
   function detectCollision(f, i) {
     f.x += f.xv;
@@ -171,11 +184,13 @@ function play() {
     }
     else if (f.y < (boundary = edge.top + 7)) {
       p1score++;
+      scard.innerHTML=p1score+" : "+cs;
       fc = 0;
       delete fireballs[i];
 
     } else if (f.y > (boundary = edge.bottom - 7)) {
       cs++;
+      scard.innerHTML=p1score+" : "+cs;
       fc = 0;
       delete fireballs[i];
 
@@ -187,6 +202,7 @@ function play() {
       f.x = boundary;
       f.xv *= -1;
     }
+    pshelper=f.yv;
 
   }
   function drawScore() {
@@ -195,24 +211,25 @@ function play() {
     ctx.strokeStyle = "pink";
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.strokeText(p1score + " : " + cs, 0, 0);
+    ctx.strokeText("Ball velocity : "+parseInt(Math.sqrt(f.yv*f.yv+f.xv*f.xv)), 0, 0);
     ctx.closePath();
   }
   let rightPressed = false, leftPressed = false;
   function handleUserMovement() {
     if (rightPressed) {
-      paddle1.x += (5+Math.abs(f.yv*0.2));
+      paddle1.x += (5+Math.abs(pshelper*0.35));
       if(paddle1.x+paddle1.len>edge.right)
       paddle1.x=edge.right-paddle1.len;
-
     }
     else if (leftPressed) {
-      paddle1.x -= (5*Math.abs(f.yv*0.2));
+      paddle1.x -= (5+Math.abs(pshelper*0.35));
       if(paddle1.x<edge.left)
       paddle1.x=edge.left;
+      
     }
-    drawPaddle();
-  
+    else if(height>width){
+      paddle1.x=edge.left+controller.value*(width-paddle1.len)/100;
+    }
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     function keyDownHandler(e) {

@@ -22,14 +22,17 @@
 
         #gameCanvas {
             margin: 1vw;
-            z-index: -1;
             position: absolute;
+            z-index: -1;
             height: 70%;
             width: 98%;
             left: 0;
             top: 10vh;
             cursor: crosshair;
             border: 0.2rem solid #fff;
+            
+        }
+        .neonBorder{
             border-radius: 1rem;
             
             box-shadow: 0 0 .2rem #fff,
@@ -40,11 +43,9 @@
                 inset 0 0 1.3rem #2cdfec;
                 box-sizing: border-box;
         }
-
         .landingView {
             
             user-select: none;
-            z-index: 2;
             display: flex;
             flex-direction: column;
             background-color: black;
@@ -79,16 +80,8 @@
             max-width: 96vw;
             text-align: center;
             border: 0.2rem solid #fff;
-            border-radius: 1rem;
             padding: 1rem;
-            box-shadow: 0 0 .2rem #fff,
-                0 0 .2rem #fff,
-                0 0 2rem #2cdfec,
-                0 0 0.8rem #2cdfec,
-                0 0 2.8rem #2cdfec,
-                inset 0 0 1.3rem #2cdfec;
-            box-sizing: border-box;
-            /* transition: 0.2s; */
+            margin-bottom: 4vh;
         }
 
         @keyframes flicker {
@@ -128,6 +121,7 @@
             border-radius: 1rem;
             overflow: auto;
             margin-bottom: 0.5vh;
+            cursor: pointer;
 
         }
 
@@ -158,13 +152,127 @@
         #play{
             animation: flicker 5s infinite alternate;   
         }
+        #position{
+            /* z-index: -1; */
+            position: absolute;
+            top: 85.5vh;
+            left: 5vw;
+            width: 90%;
+            
+            appearance: none;
+            border-radius: 5px;
+            outline: none;
+            height: 1vh;
+            background: #3ae2ee;
+            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
+        }
+        .triangle1{
+            
+            position: absolute;
+            top: 82vh;
+            /* left: 1vw; */
+            border-top: 4vh solid transparent;
+            border-bottom: 4vh solid transparent;
+            border-left: 4vh solid #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+        }
+        .triangle2{
+            transform: rotateZ(180deg);
+            position: absolute;
+            top: 82vh;
+            right: 0;
+            border-top: 4vh solid transparent;
+            border-bottom: 4vh solid transparent;
+            border-left: 4vh solid #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+        }
+        #position::-webkit-slider-thumb{
+            appearance: none;
+            height: 4vh;
+            width: 8vh;
+            border-radius: 5px;
+            background-color: #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+            border: 0.2rem solid #fff;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+        }
+        .rangeSlider{
+            appearance: none;
+            height: 1vh;
+            border-radius: 5px;
+            background: #e5eaeb;
+            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
+        }
+        .rangeSlider::-webkit-slider-thumb{
+            appearance: none;
+            height: 2vh;
+            width: 2vh;
+            border-radius: 100%;
+            background-color: #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+            border: 3px solid #fff;
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+        }
+        
+        .topBar{
+            text-align: center;
+            height: 8vh;
+            width: 100vw;
+            position: absolute;
+            z-index: -1;
+            background-color: #2cdfec;
+        }
+        #fullScreenIcon{
+            position: absolute;
+            height: 6vh;
+            top: 1vh;
+            right: 2vw;
+            cursor: pointer;
+        }
+        #backIcon{
+            position: absolute;
+            height: 6vh;
+            top: 1vh;
+            left: 2vw;
+            cursor: pointer;
+        }
+        #scoreDiv{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 8vh;
+            word-spacing: 1rem;
+            font-size: 6vh;
+
+        }
+
     </style>
 </head>
 
 <body>
-    <canvas id="gameCanvas" width="300" height="300"></canvas>
-    <div class="landingView" id="gameSettings" style="cursor: pointer;">
-        <div class="gameSettingsContainer">
+    <canvas id="gameCanvas" class="neonBorder" width="300" height="300"></canvas>
+    <input type="range" min="0" max="100" value="50" id="position">
+    <div class="triangle1"></div>
+    <div class="triangle2"></div>
+    <div class="topBar"  id="appBar">
+       <div id="scoreDiv" class="neonText">0 : 0</div>
+    </div>
+    <img src="back-arrow-svgrepo-com.svg" id="backIcon">
+    <img src="fullscreen-svgrepo-com.svg" id="fullScreenIcon">
+    <div class="landingView" id="gameSettings">
+        <div class="neonBorder gameSettingsContainer " id="gsc">
             <div class="gameLogo neonText">FIREBALL PONG ☄️<ul></ul>
             </div>
             <div class="wrapper" style="font-size: 2rem;" id="play">PLAY</div>
@@ -178,7 +286,7 @@
             </div>
             <div class="wrapper" id="difficulty">
                 <div style="font-size: 1.2rem;" class="neonText">Difficulty</div>
-                <div class="options" id="dval">Easy</div>
+                <div class="options" id="dval">Medium</div>
             </div>
            
             <div class="wrapper">
@@ -194,6 +302,7 @@
 
 
     </div>
+    
 </body>
 <script src="gameSettings.js"></script>
 <script src="fireball.js"></script>
