@@ -9,7 +9,7 @@ document.getElementById("play").onclick = function () {
   if (dv == 1) maxVelocity = 15;
   else if (dv == 2) maxVelocity = 20;
   // handleScore();
-  // openFullscreen();
+  openFullscreen();
   play();
 };
 
