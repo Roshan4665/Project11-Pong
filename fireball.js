@@ -1,14 +1,13 @@
 //
 var elem = document.documentElement;
 let size = 30;
-let maxVelocity = 7;
+let maxVelocity = 10;
 document.getElementById("play").onclick = function () {
   document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
-  if (dv == 1) maxVelocity = 10;
-  else if (dv == 2) maxVelocity = 14;
-  //change back
-  //openFullscreen();
+  if (dv == 1) maxVelocity = 15;
+  else if (dv == 2) maxVelocity = 20;
+  openFullscreen();
   play();
 };
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -113,7 +112,7 @@ function play() {
     else drawScore();
   });
 
-  size =Math.max(width/8,size * width / (300+(dv*50)));
+  size =Math.max(width/8,size * width / (250+(dv*50)));
   let paddle1 = { x: edge.left+width/2-size/2, len: size };
   let paddle2 = { x: edge.left, len: width };
   let controller=document.getElementById("position");
