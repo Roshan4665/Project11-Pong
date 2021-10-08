@@ -231,7 +231,7 @@ function play() {
       
     }
     else if(height>width){
-      paddle1.x=edge.left+controller.value*(width-paddle1.len)/100;
+      paddle1.x=edge.left+controller.value*(width-paddle1.len)/20;
     }
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
