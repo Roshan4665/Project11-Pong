@@ -1,16 +1,21 @@
 //
 var elem = document.documentElement;
 let size = 30;
-let maxVelocity = 7;
+let maxVelocity = 10;
+let minVelocity=3;
 document.getElementById("play").onclick = function () {
   document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
-  if (dv == 1) maxVelocity = 10;
-  else if (dv == 2) maxVelocity = 14;
+  if (dv == 1) maxVelocity = 15;
+  else if (dv == 2) maxVelocity = 20;
+  // handleScore();
   openFullscreen();
   play();
 };
 
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let singlePlayerScore=0;
 
 function play() {
   let bgColor = 'black';
@@ -22,6 +27,19 @@ function play() {
   let ctx = canvas.getContext('2d');
 
   let p1score = 0, cs = 0;
+  let scard=document.getElementById("scoreDiv");
+function handleScore(){
+  if(modeVal==0)
+  {
+    // if(singlePlayerScore>100)
+    scard.innerHTML=singlePlayerScore;
+  }
+  else
+  {
+    scard.innerHTML=p1score+" : "+cs;
+  }
+}
+handleScore();
   (onresize = function () {
     if (canvas.clientHeight < canvas.clientWidth) {
       canvas.style.width = "60vw";
@@ -60,8 +78,8 @@ function play() {
         index: nextIndex,
         x: edge.left + Math.random() * width,
         y: edge.top + height / 2,
-        xv: 3,
-        yv: 3,
+        xv: minVelocity,
+        yv: minVelocity,
       };
     };
   })();
@@ -98,7 +116,7 @@ function play() {
     ctx.translate(o.x, o.y);
     ctx.globalCompositeOperation = 'lighter';
     particlesLogic();
-
+    
     for (var i in fireballs) {
       const f = fireballLogic(i);
       detectCollision(f, i);
@@ -111,7 +129,7 @@ function play() {
     else drawScore();
   });
 
-  size =Math.max( width/6,size * width / (200+(dv*50)));
+  size =Math.max(width/8,size * width / (250+(dv*50)));
   let paddle1 = { x: edge.left+width/2-size/2, len: size };
   let paddle2 = { x: edge.left, len: width };
   let controller=document.getElementById("position");
@@ -166,31 +184,35 @@ function play() {
     ctx.fill();
     ctx.closePath();
   }
-  let scard=document.getElementById("scoreDiv");
+
 
   function detectCollision(f, i) {
+    
     f.x += f.xv;
     f.y += f.yv;
     var boundary;
     if ((f.x >= paddle1.x && f.x <= paddle1.x + paddle1.len && f.y + f.yv >= edge.bottom - height / 20) || (f.x >= paddle2.x && f.x <= paddle2.x + paddle2.len && f.y + f.yv <= edge.top + height / 20)) {
+      singlePlayerScore+=parseInt((Math.random()+0.1)*(f.xv*f.xv+f.yv*f.yv)*(dv+1*10)/paddle1.len);
+      handleScore();
       let vv = parseInt(Math.random() * maxVelocity);
-      let hv = parseInt((Math.random() - 0.5) * maxVelocity * 2);
+      let hv = parseInt((Math.random() - 0.5) * maxVelocity);
       if (f.yv < 0)
-        f.yv = 3 + vv;
+        f.yv = minVelocity + vv;
       else
-        f.yv = -(3 + vv);
-      f.xv <= 0 ? f.xv = hv - 3 : f.xv = hv + 3;
+        f.yv = -(minVelocity + vv);
+      f.xv <= 0 ? f.xv = hv - minVelocity : f.xv = hv + minVelocity;
 
     }
     else if (f.y < (boundary = edge.top + 7)) {
       p1score++;
-      scard.innerHTML=p1score+" : "+cs;
+      handleScore();
       fc = 0;
       delete fireballs[i];
 
     } else if (f.y > (boundary = edge.bottom - 7)) {
+      singlePlayerScore-=parseInt((Math.random()+0.1)*(f.xv*f.xv+f.yv*f.yv)*(dv+1*10)/paddle1.len);
       cs++;
-      scard.innerHTML=p1score+" : "+cs;
+      handleScore();
       fc = 0;
       delete fireballs[i];
 
@@ -217,17 +239,17 @@ function play() {
   let rightPressed = false, leftPressed = false;
   function handleUserMovement() {
     if (rightPressed) {
-      paddle1.x += (5+Math.abs(pshelper*0.35));
+      paddle1.x += (7+Math.abs(pshelper*0.35));
       if(paddle1.x+paddle1.len>edge.right)
       paddle1.x=edge.right-paddle1.len;
     }
     else if (leftPressed) {
-      paddle1.x -= (5+Math.abs(pshelper*0.35));
+      paddle1.x -= (7+Math.abs(pshelper*0.35));
       if(paddle1.x<edge.left)
       paddle1.x=edge.left;
       
     }
-    else if(height>width){
+    else if(isMobile){
       paddle1.x=edge.left+controller.value*(width-paddle1.len)/100;
     }
     document.addEventListener("keydown", keyDownHandler, false);
@@ -241,9 +263,7 @@ function play() {
       else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = false;
     }
     // console.log("hi");
-    
-
-
   }
+  
 
 }
