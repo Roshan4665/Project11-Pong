@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Add different paddles to be selected with different speds and size -->
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="pc.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -32,17 +33,7 @@
             border: 0.4vw solid #fff;
             
         }
-        /* .neonBorder{
-            border-radius: 1rem;
-            
-            box-shadow: 0 0 .2rem #fff,
-                0 0 .2rem #fff,
-                0 0 2rem #2cdfec,
-                0 0 0.8rem #2cdfec,
-                0 0 2.8rem #2cdfec,
-                inset 0 0 1.3rem #2cdfec;
-                box-sizing: border-box;
-        } */
+        
         .landingView {
             
             user-select: none;
@@ -84,7 +75,7 @@
             margin-bottom: 4vh;
         }
 
-        /* @keyframes flicker {
+        @keyframes flicker {
 
             0%,
             18%,
@@ -109,7 +100,7 @@
             55% {
                 text-shadow: none;
             }
-        } */
+        }
 
         .wrapper {
             /* border: 2px solid green; */
@@ -125,33 +116,14 @@
 
         }
 
-        /* .wrapper:hover {
-            color: #1a1b1d;
-            background: #3ae2ee;
-            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
-        } */
+        
 
         .rangeSlider {
             margin-top: 0.5vh;
             width: 90%;
         }
 
-        /* .neonText {
-            color: #fff;
-            text-shadow:
-                0 0 7px #fff,
-                0 0 10px #fff,
-                0 0 21px #fff,
-                0 0 42px #eb1a63,
-                0 0 82px #eb1a63,
-                0 0 92px #eb1a63,
-                0 0 102px #eb1a63,
-                0 0 151px#eb1a63;
-
-        } */
-        /* #play{
-            animation: flicker 5s infinite alternate;   
-        } */
+      
         #position{
             /* z-index: -1; */
             position: absolute;
@@ -163,46 +135,9 @@
             border-radius: 5px;
             outline: none;
             height: 1vh;
-            /* background: #3ae2ee;
-            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec; */
-        }
-        /* .triangle1{
             
-            position: absolute;
-            top: 82vh; */
-            /* left: 1vw; */
-            /* border-top: 4vh solid transparent;
-            border-bottom: 4vh solid transparent;
-            border-left: 4vh solid #2cdfec;
-            filter: drop-shadow(0 0 0.75rem #2cdfec); 
-        } */
-        /* .triangle2{
-            transform: rotateZ(180deg);
-            position: absolute;
-            top: 82vh;
-            right: 0;
-            border-top: 4vh solid transparent;
-            border-bottom: 4vh solid transparent;
-            border-left: 4vh solid #2cdfec;
-            filter: drop-shadow(0 0 0.75rem #2cdfec); 
-        } */
-        /* #position::-webkit-slider-thumb{
-            appearance: none;
-            height: 4vh;
-            width: 8vh;
-            border-radius: 5px;
-            background-color: #2cdfec;
-            filter: drop-shadow(0 0 0.75rem #2cdfec); 
-            border: 0.2rem solid #fff;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            box-shadow: 0 0 .2rem #fff,
-                0 0 .2rem #fff,
-                0 0 2rem #2cdfec,
-                0 0 0.8rem #2cdfec,
-                0 0 2.8rem #2cdfec,
-                inset 0 0 1.3rem #2cdfec;
-        } */
+        }
+        
         .rangeSlider{
             appearance: none;
             height: 1vh;
@@ -210,21 +145,7 @@
             /* background: #e5eaeb;
             box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec; */
         }
-        /* .rangeSlider::-webkit-slider-thumb{
-            appearance: none;
-            height: 2vh;
-            width: 2vh;
-            border-radius: 100%;
-            background-color: #2cdfec;
-            filter: drop-shadow(0 0 0.75rem #2cdfec); 
-            border: 3px solid #fff;
-            box-shadow: 0 0 .2rem #fff,
-                0 0 .2rem #fff,
-                0 0 2rem #2cdfec,
-                0 0 0.8rem #2cdfec,
-                0 0 2.8rem #2cdfec,
-                inset 0 0 1.3rem #2cdfec;
-        } */
+        
         
         .topBar{
             text-align: center;
@@ -257,6 +178,7 @@
             font-size: 6vh;
 
         }
+
 
     </style>
 </head>
@@ -293,10 +215,6 @@
                 <div style="font-size: 1.2rem;" class="neonText">Paddle Size</div>
                 <input type="range" min="1" max="100" class="rangeSlider" value="50" id="pSize">
             </div>
-            <div class="wrapper" style="display: none;">
-                <div style="font-size: 1.2rem;" class="neonText">Fireball Speed</div>
-                <input type="range" min="1" max="100" class="rangeSlider" value="10" id="speed">
-            </div>
             
         </div>
 
@@ -306,6 +224,7 @@
 </body>
 <script src="gameSettings.js"></script>
 <script src="fireball.js"></script>
+<script src="systemplayer.js"></script>
 
 
 </html>

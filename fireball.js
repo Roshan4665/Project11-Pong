@@ -7,9 +7,11 @@ document.getElementById("play").onclick = function () {
   size = document.getElementById("pSize").value;
   if (dv == 1) maxVelocity = 10;
   else if (dv == 2) maxVelocity = 14;
-  openFullscreen();
+  //change back
+  //openFullscreen();
   play();
 };
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 
 function play() {
@@ -111,7 +113,7 @@ function play() {
     else drawScore();
   });
 
-  size =Math.max( width/6,size * width / (200+(dv*50)));
+  size =Math.max(width/8,size * width / (300+(dv*50)));
   let paddle1 = { x: edge.left+width/2-size/2, len: size };
   let paddle2 = { x: edge.left, len: width };
   let controller=document.getElementById("position");
@@ -174,7 +176,7 @@ function play() {
     var boundary;
     if ((f.x >= paddle1.x && f.x <= paddle1.x + paddle1.len && f.y + f.yv >= edge.bottom - height / 20) || (f.x >= paddle2.x && f.x <= paddle2.x + paddle2.len && f.y + f.yv <= edge.top + height / 20)) {
       let vv = parseInt(Math.random() * maxVelocity);
-      let hv = parseInt((Math.random() - 0.5) * maxVelocity * 2);
+      let hv = parseInt((Math.random() - 0.5) * maxVelocity);
       if (f.yv < 0)
         f.yv = 3 + vv;
       else
@@ -217,17 +219,17 @@ function play() {
   let rightPressed = false, leftPressed = false;
   function handleUserMovement() {
     if (rightPressed) {
-      paddle1.x += (5+Math.abs(pshelper*0.35));
+      paddle1.x += (7+Math.abs(pshelper*0.35));
       if(paddle1.x+paddle1.len>edge.right)
       paddle1.x=edge.right-paddle1.len;
     }
     else if (leftPressed) {
-      paddle1.x -= (5+Math.abs(pshelper*0.35));
+      paddle1.x -= (7+Math.abs(pshelper*0.35));
       if(paddle1.x<edge.left)
       paddle1.x=edge.left;
       
     }
-    else if(height>width){
+    else if(isMobile){
       paddle1.x=edge.left+controller.value*(width-paddle1.len)/100;
     }
     document.addEventListener("keydown", keyDownHandler, false);

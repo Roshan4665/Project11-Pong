@@ -1,0 +1,75 @@
+@media (min-width:961px) {
+    .triangle1{
+            
+            position: absolute;
+            top: 82vh; 
+            /* left: 1vw; */
+            border-top: 4vh solid transparent;
+            border-bottom: 4vh solid transparent;
+            border-left: 4vh solid #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+        }
+        .triangle2{
+            transform: rotateZ(180deg);
+            position: absolute;
+            top: 82vh;
+            right: 0;
+            border-top: 4vh solid transparent;
+            border-bottom: 4vh solid transparent;
+            border-left: 4vh solid #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+        }
+         #position::-webkit-slider-thumb{
+            appearance: none;
+            height: 4vh;
+            width: 8vh;
+            border-radius: 5px;
+            background-color: #2cdfec;
+            filter: drop-shadow(0 0 0.75rem #2cdfec); 
+            border: 0.2rem solid #fff;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+        }
+        #position{
+            background: #3ae2ee; 
+            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec; 
+        }
+          .neonText {
+            color: #fff;
+            text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #eb1a63,
+                0 0 82px #eb1a63,
+                0 0 92px #eb1a63,
+                0 0 102px #eb1a63,
+                0 0 151px#eb1a63;
+
+        }
+        #play{
+            animation: flicker 5s infinite alternate;   
+        }
+        .wrapper:hover {
+            color: #1a1b1d;
+            background: #3ae2ee;
+            box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
+        }
+        .neonBorder{
+            border-radius: 1rem;
+            
+            box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #2cdfec,
+                0 0 0.8rem #2cdfec,
+                0 0 2.8rem #2cdfec,
+                inset 0 0 1.3rem #2cdfec;
+                box-sizing: border-box;
+        }
+}
