@@ -1,9 +1,9 @@
 @media (min-width:961px) {
-    .triangle1{
+    /* .triangle1{
             
             position: absolute;
             top: 82vh; 
-            /* left: 1vw; */
+        
             border-top: 4vh solid transparent;
             border-bottom: 4vh solid transparent;
             border-left: 4vh solid #2cdfec;
@@ -18,7 +18,7 @@
             border-bottom: 4vh solid transparent;
             border-left: 4vh solid #2cdfec;
             filter: drop-shadow(0 0 0.75rem #2cdfec); 
-        }
+        } */
          #position::-webkit-slider-thumb{
             appearance: none;
             height: 4vh;
