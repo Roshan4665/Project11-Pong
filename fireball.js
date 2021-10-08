@@ -3,8 +3,11 @@ var elem = document.documentElement;
 let size = 30;
 let maxVelocity = 7;
 document.getElementById("play").onclick = function () {
-  document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
+  document.getElementById("gameSettings").innerHTML = "";
+  document.getElementById("gameSettings").style.display = "none"; 
+
+
   if (dv == 1) maxVelocity = 10;
   else if (dv == 2) maxVelocity = 14;
   openFullscreen();
