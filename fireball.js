@@ -4,13 +4,20 @@ let size = 30;
 let maxVelocity = 10;
 let minVelocity=3;
 document.getElementById("play").onclick = function () {
-  document.getElementById("gameSettings").style.display = "none";
+  if(modeVal==1)
+  {
+    alert("Multiplayer is under progress. Please continue with single player till then.")
+  }
+  else
+  {
+    document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
   if (dv == 1) maxVelocity = 15;
   else if (dv == 2) maxVelocity = 20;
   // handleScore();
   openFullscreen();
   play();
+  }
 };
 
 
@@ -194,13 +201,21 @@ handleScore();
     if ((f.x >= paddle1.x && f.x <= paddle1.x + paddle1.len && f.y + f.yv >= edge.bottom - height / 20) || (f.x >= paddle2.x && f.x <= paddle2.x + paddle2.len && f.y + f.yv <= edge.top + height / 20)) {
       singlePlayerScore+=parseInt((Math.random()+0.1)*(f.xv*f.xv+f.yv*f.yv)*(dv+1*10)/paddle1.len);
       handleScore();
-      let vv = parseInt(Math.random() * maxVelocity);
-      let hv = parseInt((Math.random() - 0.5) * maxVelocity);
-      if (f.yv < 0)
-        f.yv = minVelocity + vv;
+      if(randomVal==0)
+      {
+        let vv = parseInt(Math.random() * maxVelocity);
+        let hv = parseInt((Math.random() - 0.5) * maxVelocity);
+        if (f.yv < 0)
+          f.yv = minVelocity + vv;
+        else
+          f.yv = -(minVelocity + vv);
+        f.xv <= 0 ? f.xv = hv - minVelocity : f.xv = hv + minVelocity;
+      }
       else
-        f.yv = -(minVelocity + vv);
-      f.xv <= 0 ? f.xv = hv - minVelocity : f.xv = hv + minVelocity;
+      {
+        f.yv*=-1.05;
+        f.xv*=1.05;
+      }
 
     }
     else if (f.y < (boundary = edge.top + 7)) {

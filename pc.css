@@ -57,7 +57,8 @@
             animation: flicker 5s infinite alternate;   
         }
         .wrapper:hover {
-            color: #1a1b1d;
+            
+            color: #18191b !important;
             background: #3ae2ee;
             box-shadow: 0 0 10px #2cdfec, 0 0 40px #2cdfec, 0 0 80px #2cdfec;
         }
