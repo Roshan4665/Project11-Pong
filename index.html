@@ -20,9 +20,11 @@
         }
         body{
             background-color: black;
+            
         }
 
         #gameCanvas {
+            
             margin: 0.6vw;
             position: absolute;
             z-index: -1;
@@ -36,11 +38,11 @@
         }
         
         .landingView {
-            
+            background-image: url("wallbg.jpg");
+            background-size: contain;
             user-select: none;
             display: flex;
             flex-direction: column;
-            background-color: black;
             color: white;
             height: 100vh;
             width: 100vw;
@@ -67,10 +69,12 @@
         }
 
         .gameSettingsContainer {
+           background-color: black;
             word-spacing: 1rem;
             max-width: 96vw;
             text-align: center;
             border: 0.2rem solid #fff;
+            border-radius: 1rem;
             padding: 1rem;
             margin-bottom: 4vh;
         }
