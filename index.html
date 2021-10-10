@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="pc.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Vibur:400' rel='stylesheet' type='text/css'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +16,15 @@
             margin: 0;
             padding: 0;
             user-select: none;
+            font-family: "Vibur", sans-serif;
         }
         body{
             background-color: black;
+            
         }
 
         #gameCanvas {
+            
             margin: 0.6vw;
             position: absolute;
             z-index: -1;
@@ -35,11 +38,13 @@
         }
         
         .landingView {
-            
+            background-color: black;
+            background-image: url("wallbg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
             user-select: none;
             display: flex;
             flex-direction: column;
-            background-color: black;
             color: white;
             height: 100vh;
             width: 100vw;
@@ -57,8 +62,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             /* margin-bottom: 1vh; */
-            
-
         }
 
         ul {
@@ -67,11 +70,12 @@
         }
 
         .gameSettingsContainer {
-            font-family: 'Satisfy', cursive;
+           background-color: black;
             word-spacing: 1rem;
             max-width: 96vw;
             text-align: center;
             border: 0.2rem solid #fff;
+            border-radius: 1rem;
             padding: 1rem;
             margin-bottom: 4vh;
         }

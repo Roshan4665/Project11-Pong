@@ -1,7 +1,7 @@
 //
 var elem = document.documentElement;
 let size = 30;
-let maxVelocity = 10;
+let maxVelocity = 7;
 let minVelocity=3;
 document.getElementById("play").onclick = function () {
   if(modeVal==1)
@@ -12,7 +12,7 @@ document.getElementById("play").onclick = function () {
   {
     document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
-  if (dv == 1) maxVelocity = 15;
+  if (dv == 1) maxVelocity = 10;
   else if (dv == 2) maxVelocity = 20;
   // handleScore();
   openFullscreen();
