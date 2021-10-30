@@ -1,13 +1,9 @@
-//
 var elem = document.documentElement;
 let size = 30;
 let maxVelocity = 7;
 document.getElementById("play").onclick = function () {
+  document.getElementById("gameSettings").style.display = "none";
   size = document.getElementById("pSize").value;
-  document.getElementById("gameSettings").innerHTML = "";
-  document.getElementById("gameSettings").style.display = "none"; 
-
-
   if (dv == 1) maxVelocity = 10;
   else if (dv == 2) maxVelocity = 14;
   openFullscreen();
@@ -116,7 +112,7 @@ function play() {
 
   size =Math.max( width/6,size * width / (200+(dv*50)));
   let paddle1 = { x: edge.left+width/2-size/2, len: size };
-  let paddle2 = { x: edge.left, len: width };
+  let paddle2 = { x: edge.left, len: width/2 };
   let controller=document.getElementById("position");
   function particlesLogic() {
     for (var i in particles) {
@@ -231,7 +227,7 @@ function play() {
       
     }
     else if(height>width){
-      paddle1.x=edge.left+controller.value*(width-paddle1.len)/20;
+      paddle1.x=edge.left+controller.value*(width-paddle1.len)/100;
     }
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
