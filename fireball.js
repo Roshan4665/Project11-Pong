@@ -137,7 +137,7 @@ handleScore();
 
   size =Math.max(width/8,size * width / (250+(dv*50)));
   let paddle1 = { x: edge.left+width/2-size/2, len: size };
-  let paddle2 = { x: edge.left, len: width/2 };
+  let paddle2 = { x: edge.left, len: width };
   let controller=document.getElementById("position");
   function particlesLogic() {
     for (var i in particles) {
